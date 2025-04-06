@@ -1,0 +1,28 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+}
+
+body > div {
+  margin: 0 auto;
+  width: 800px;
+}
+
+header {
+  padding: 20px 0;
+}
+
+header > a {
+  color: red;
+  text-decoration: none;
+  font-size: larger;
+  font-weight: bold;
+}
+
+input,
+button {
+  color: inherit;
+}

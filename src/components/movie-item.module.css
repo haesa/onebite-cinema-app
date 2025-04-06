@@ -1,0 +1,11 @@
+.link {
+  transition: 200ms transform ease;
+}
+
+.link:hover {
+  transform: scale(1.05);
+}
+
+.link > img {
+  width: 100%;
+}
