@@ -1,16 +1,18 @@
 import { MovieData } from '@/types';
 import MovieItem from '@/components/movie-item';
 import style from './page.module.css';
+import { delay } from '@/util/delay';
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
 }) {
+  await delay(1500);
   const { q = '' } = await searchParams;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
-    { next: { revalidate: 60 * 60 } }
+    { cache: 'force-cache' }
   );
 
   if (!response.ok) {
