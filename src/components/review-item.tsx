@@ -1,7 +1,14 @@
 import { ReviewData } from '@/types';
+import ReviewItemDeleteButton from '@/components/review-item-delete-button';
 import style from './review-item.module.css';
 
-export default function ReviewItem({ content, author, createdAt }: ReviewData) {
+export default function ReviewItem({
+  id,
+  content,
+  author,
+  createdAt,
+  movieId,
+}: ReviewData) {
   return (
     <div className={style.container}>
       <div className={style.header_container}>
@@ -15,7 +22,9 @@ export default function ReviewItem({ content, author, createdAt }: ReviewData) {
         </div>
       </div>
       <div>{content}</div>
-      <div className={style.delete_btn}>리뷰 삭제하기</div>
+      <div className={style.delete_btn}>
+        <ReviewItemDeleteButton reviewId={id} movieId={movieId} />
+      </div>
     </div>
   );
 }

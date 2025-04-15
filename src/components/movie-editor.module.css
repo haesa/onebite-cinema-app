@@ -23,6 +23,10 @@
   border-color: white;
 }
 
+.form_container textarea:disabled {
+  border-color: rgb(170, 170, 170);
+}
+
 .form_container input {
   padding: 10px;
   box-sizing: border-box;
@@ -39,6 +43,10 @@
   border-color: white;
 }
 
+.form_container input:disabled {
+  border-color: rgb(170, 170, 170);
+}
+
 .form_container button {
   width: 80px;
   padding: 10px;
@@ -53,4 +61,12 @@
   display: flex;
   justify-content: flex-end;
   gap: 5px;
+}
+
+.submit_container button {
+  cursor: pointer;
+}
+
+.submit_container button:disabled {
+  cursor: not-allowed;
 }
