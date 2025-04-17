@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       fullUrl: true,
     },
   },
+  images: {
+    domains: ['search.pstatic.net'],
+  },
 };
 
 export default nextConfig;

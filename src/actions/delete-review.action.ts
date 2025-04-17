@@ -1,6 +1,5 @@
 'use server';
 
-import { delay } from '@/util/delay';
 import { revalidateTag } from 'next/cache';
 
 export default async function deleteReviewAction(_: any, formData: FormData) {

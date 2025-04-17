@@ -1,13 +1,20 @@
 import { MovieData } from '@/types';
-import { Suspense } from 'react';
+
+import { Metadata } from 'next';
 import MovieItem from '@/components/movie-item';
-import MovieListSkeleton from '@/components/skeleton/movie-list-skeleton';
-import { delay } from '@/util/delay';
 import style from './page.module.css';
 
-async function AllMovies() {
-  await delay(1500);
+export const metadata: Metadata = {
+  title: '한입 시네마',
+  description: '한입 시네마에 등록된 영화를 만나보세요',
+  openGraph: {
+    title: '한입 시네마',
+    description: '한입 시네마에 등록된 영화를 만나보세요',
+    images: ['/thumbnail.png'],
+  },
+};
 
+async function AllMovies() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`,
     { cache: 'force-cache' }
@@ -29,8 +36,6 @@ async function AllMovies() {
 }
 
 async function RecoMovies() {
-  await delay(3000);
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/random`,
     { next: { revalidate: 3 } }
@@ -56,16 +61,12 @@ export default function Home() {
     <div className={style.container}>
       <section>
         <h3>지금 가장 추천하는 영화</h3>
-        <Suspense fallback={<MovieListSkeleton col={3} count={3} />}>
-          <RecoMovies />
-        </Suspense>
+        <RecoMovies />
       </section>
 
       <section>
         <h3>등록된 모든 영화</h3>
-        <Suspense fallback={<MovieListSkeleton col={5} count={20} />}>
-          <AllMovies />
-        </Suspense>
+        <AllMovies />
       </section>
     </div>
   );

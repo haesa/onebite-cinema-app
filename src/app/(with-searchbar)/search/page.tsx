@@ -1,13 +1,13 @@
 import { MovieData } from '@/types';
+
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 import MovieItem from '@/components/movie-item';
 import MovieListSkeleton from '@/components/skeleton/movie-list-skeleton';
-import { delay } from '@/util/delay';
+
 import style from './page.module.css';
 
 async function SearchResult({ q }: { q: string }) {
-  await delay(1500);
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
     { cache: 'force-cache' }
@@ -26,6 +26,25 @@ async function SearchResult({ q }: { q: string }) {
       ))}
     </div>
   );
+}
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}): Promise<Metadata> {
+  const { q } = await searchParams;
+
+  // 현재 페이지의 메타 데이터를 동적으로 생성하는 역할
+  return {
+    title: `${q}: 한입 시네마 검색`,
+    description: `${q}의 검색 결과입니다`,
+    openGraph: {
+      title: `${q}: 한입 시네마 검색`,
+      description: `${q}의 검색 결과입니다`,
+      images: ['/thumbnail.png'],
+    },
+  };
 }
 
 export default async function Page({

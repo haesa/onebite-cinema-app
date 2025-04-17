@@ -1,4 +1,7 @@
 .link {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 39/56;
   transition: 200ms transform ease;
 }
 
@@ -6,6 +9,6 @@
   transform: scale(1.05);
 }
 
-.link > img {
-  width: 100%;
+.image {
+  object-fit: 'cover';
 }
