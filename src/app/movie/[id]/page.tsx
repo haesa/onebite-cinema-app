@@ -6,12 +6,17 @@ import ReviewEditor from '@/components/movie-editor';
 import ReviewItem from '@/components/review-item';
 import style from './page.module.css';
 
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`
   );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
   const movies: MovieData[] = await response.json();
 
   return movies.map(({ id }) => ({ id: id.toString() }));
@@ -48,7 +53,12 @@ async function MovieDetail({ movieId }: { movieId: string }) {
         className={style.cover_img_container}
         style={{ backgroundImage: `url(${posterImgUrl})` }}
       >
-        <Image src={posterImgUrl} width={224} height={350} alt={title} />
+        <Image
+          src={posterImgUrl}
+          width={224}
+          height={350}
+          alt={`영화 ${title}의 포스터`}
+        />
       </div>
       <div className={style.title}>{title}</div>
       <div>
